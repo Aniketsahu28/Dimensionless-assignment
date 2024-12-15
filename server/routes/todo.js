@@ -4,20 +4,24 @@ const { TodoModel } = require('../models/todo')
 
 todoRouter.post('/createtodo', async (req, res) => {
     const { title, date, time } = req.body;
+    if (!title) {
+        return res.status(400).json({ message: "Title is required" });
+    }
     try {
         await TodoModel.create({
             title,
             date,
             time
-        })
+        });
 
         res.status(201).json({
             message: "New todo added"
-        })
+        });
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
 
 todoRouter.get('/', async (req, res) => {
     try {

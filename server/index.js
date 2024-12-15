@@ -7,7 +7,6 @@ const cors = require('cors')
 const app = express();
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT;
-
 app.use(express.json());
 app.use(cors())
 
@@ -22,3 +21,4 @@ const main = async () => {
 }
 
 main();
+module.exports = { app };
