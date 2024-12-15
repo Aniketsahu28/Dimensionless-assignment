@@ -15,7 +15,7 @@ const Todo = ({ todo }) => {
     const deleteTodo = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.delete(
+            await axios.delete(
                 `${BACKEND_URL}/api/todo/deleteone`,
                 {
                     data: { id: todo._id },
@@ -24,7 +24,6 @@ const Todo = ({ todo }) => {
             setTodos((prevTodos) => [
                 ...prevTodos.filter((item) => item._id !== todo._id),
             ]);
-            alert(response.data.message);
         } catch (error) {
             alert(error.response?.data.message || error);
         }
