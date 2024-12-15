@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { popupAtom } from "../store/popupAtom";
 import { todosAtom } from "../store/todosAtom";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const EditTodoPopup = ({ todo }) => {
     const setPopup = useSetRecoilState(popupAtom);
@@ -17,7 +18,7 @@ const EditTodoPopup = ({ todo }) => {
     const edittodo = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch("http://192.168.0.110:3000/api/todo/", {
+            await axios.patch(`${BACKEND_URL}/api/todo/`, {
                 id: todo._id,
                 title: todoDetails.title,
                 date: todoDetails.date,

@@ -4,13 +4,14 @@ import { useSetRecoilState } from 'recoil';
 import { popupAtom } from '../store/popupAtom';
 import axios from 'axios';
 import { todosAtom } from '../store/todosAtom';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const DeleteallTodoPopup = () => {
     const setPopup = useSetRecoilState(popupAtom)
     const setTodos = useSetRecoilState(todosAtom)
     const deletealltodos = async () => {
         try {
-            const response = await axios.delete('http://192.168.0.110:3000/api/todo/deleteall')
+            const response = await axios.delete(`${BACKEND_URL}/api/todo/deleteall`)
             setTodos([])
             alert(response.data.message)
         }

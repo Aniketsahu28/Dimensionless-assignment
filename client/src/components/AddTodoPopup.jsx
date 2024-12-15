@@ -5,6 +5,7 @@ import { popupAtom } from '../store/popupAtom';
 import { todosAtom } from '../store/todosAtom';
 import { useRef } from 'react';
 import axios from 'axios';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddTodoPopup = () => {
     const setPopup = useSetRecoilState(popupAtom)
@@ -16,7 +17,7 @@ const AddTodoPopup = () => {
     const addtodo = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://192.168.0.110:3000/api/todo/createtodo', {
+            const response = await axios.post(`${BACKEND_URL}/api/todo/createtodo`, {
                 title: todotitle.current.value,
                 date: tododate.current.value,
                 time: todotime.current.value

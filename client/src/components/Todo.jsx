@@ -6,6 +6,7 @@ import { popupAtom } from "../store/popupAtom";
 import { todosAtom } from "../store/todosAtom";
 import axios from "axios";
 import EditTodoPopup from "./EditTodoPopup";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Todo = ({ todo }) => {
     const [popup, setPopup] = useRecoilState(popupAtom);
@@ -15,7 +16,7 @@ const Todo = ({ todo }) => {
         e.preventDefault();
         try {
             const response = await axios.delete(
-                "http://192.168.0.110:3000/api/todo/deleteone",
+                `${BACKEND_URL}/api/todo/deleteone`,
                 {
                     data: { id: todo._id },
                 }
@@ -31,7 +32,7 @@ const Todo = ({ todo }) => {
 
     const toggleTodoStatus = async (e) => {
         try {
-            await axios.patch("http://192.168.0.110:3000/api/todo/", {
+            await axios.patch(`${BACKEND_URL}/api/todo/`, {
                 id: todo._id,
                 status: !todo.status,
             });

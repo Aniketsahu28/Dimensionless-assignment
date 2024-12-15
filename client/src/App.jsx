@@ -10,6 +10,7 @@ import { todosAtom } from './store/todosAtom'
 import { popupAtom } from './store/popupAtom'
 import PopupScreen from "./components/PopupScreen";
 import { useState } from "react";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [todos, setTodos] = useRecoilState(todosAtom)
@@ -37,7 +38,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get("http://192.168.0.110:3000/api/todo");
+      const response = await axios.get(`${BACKEND_URL}/api/todo`);
       setTodos(response.data.todos);
     } catch (error) {
       console.log(error.response.data.message || error);
